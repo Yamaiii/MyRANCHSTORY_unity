@@ -64,7 +64,7 @@ public class NPCTry_302 : MonoBehaviour {
 
     private void ToSea()
     {
-        //
+        //切换动作
     }
 
     private void FreeTime()
@@ -88,6 +88,7 @@ public class NPCTry_302 : MonoBehaviour {
                 ToDrink();
                 break;
             case 2:
+                ToSea();
                 break;
         }
     }
