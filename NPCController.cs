@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,12 +9,13 @@ public enum NPCKinds
     FARMER,
     NOMAD
 }
-public class NPCTry_302 : MonoBehaviour {
+public class NPCController : MonoBehaviour
+{
     NavMeshAgent agent;
     Animator ani;
     public Transform homePos;
     public int wakeUpTime;
-    public Vector3 drinkPos;
+    public Transform drinkPos;
     public Transform workPos;
     public bool isWork = true;
     private void Awake()
@@ -22,9 +23,10 @@ public class NPCTry_302 : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         ani = GetComponent<Animator>();
     }
+
     private void Update()
     {
-        if (true/*如果AI广播说到了休息的点*/)
+        if (AIBroadcast.Instance.noonTime)
         {
             //切换行走
             agent.destination = homePos.position;
@@ -33,7 +35,7 @@ public class NPCTry_302 : MonoBehaviour {
                 //切换动作：睡觉
             }
         }
-        if (true/*如果是周末*/)
+        if (Timetxt.Instance.day_Time<=6)
         {
             FreeTime();
         }
@@ -54,8 +56,8 @@ public class NPCTry_302 : MonoBehaviour {
     private void ToDrink()
     {
         //切换动作至行走，走到酒馆
-        agent.destination = drinkPos;
-        if (Vector3.Distance(transform.position,drinkPos)<agent.stoppingDistance)
+        agent.destination = drinkPos.position;
+        if (Vector3.Distance(transform.position,drinkPos.position)<agent.stoppingDistance)
         {
             //切换动作喝酒
         }
@@ -71,12 +73,12 @@ public class NPCTry_302 : MonoBehaviour {
     {
         isWork = false;
         int i=0;
-        if (true/*如果到了他起床的点*/)
+        if (true)
         {
             //切换动作
             i = Random.Range(0,10);
         }
-        if (true/*如果到了下午切换时间的点*/)
+        if (Timetxt.Instance.hour_Time==14)
         {
             i = Random.Range(0,10);
         }
@@ -92,5 +94,4 @@ public class NPCTry_302 : MonoBehaviour {
                 break;
         }
     }
-
 }
