@@ -13,6 +13,7 @@ public class NPCController : MonoBehaviour
 {
     NavMeshAgent agent;
     Animator ani;
+    public NPCKinds kind;
     public Transform homePos;
     public int wakeUpTime;
     public Transform drinkPos;
@@ -35,7 +36,7 @@ public class NPCController : MonoBehaviour
                 //切换动作：睡觉
             }
         }
-        if (Timetxt.Instance.day_Time<=6)
+        if (Timetxt.Instance.day_Time>=6)
         {
             FreeTime();
         }
@@ -51,6 +52,10 @@ public class NPCController : MonoBehaviour
         agent.destination = workPos.position;
         //切换工作姿势和状态
         isWork = true;
+        if (kind = NPCKinds.FARMER || kind = NPCKinds.NOMAD)
+        {
+
+        }
     }
 
     private void ToDrink()

@@ -19,6 +19,11 @@ public class Merchant : MonoBehaviour
     {
         GameManager.Instance.InTheOpenUI(true);
         thisStore.gameObject.SetActive(true);
+        SayHi();
     }
-    
+
+    public void SayHi()
+    {
+        //当角色来买东西时，问候问候主角
+    }
 }
